@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 🎂</title>
+<style>
+body{
+  margin:0;
+  padding:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+}
+.container{
+  text-align:center;
+  width:90%;
+  max-width:400px;
+  color:#fff;
+}
+.slide{
+  display:none;
+  animation: fade 0.8s ease-in-out;
+}
+.active{
+  display:block;
+}
+button{
+  margin-top:20px;
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:white;
+  color:#ff5e78;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+button:hover{
+  transform:scale(1.1);
+}
+@keyframes fade{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+/* Floating hearts */
+.heart{
+  position:absolute;
+  color:white;
+  font-size:20px;
+  animation: float 5s linear infinite;
+}
+@keyframes float{
+  0%{transform:translateY(100vh); opacity:1;}
+  100%{transform:translateY(-10vh); opacity:0;}
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="slide active">
+    <h2>🎂 Selamat Ulang Tahun Kamu 🎂</h2>
+    <p>Hari ini kamu resmi bertambah umur...</p>
+    <button onclick="nextSlide()">Lanjut 👉</button>
+  </div>
+  <div class="slide">
+    <h3>Semoga panjang umur ✨</h3>
+    <p>Sehat selalu, rezeki lancar,<br>
+    dan semoga makin dewasa (walaupun kelakuannya masih random 😌)</p>
+    <button onclick="nextSlide()">Lanjut Lagi 👉</button>
+  </div>
+  <div class="slide">
+    <h3>Sedikit Jujur Ya...</h3>
+    <p>Sebenarnya aku bikin website ini cuma buat kamu.<br><br>
+    Iya, aku. Yang lagi baca ini juga mungkin senyum-senyum sendiri sekarang.</p>
+    <button onclick="nextSlide()">Terakhir 👉</button>
+  </div>
+  <div class="slide">
+    <h3>Pesan Spesial 💌</h3>
+    <p>Aku cuma mau bilang…<br><br>
+    jangan terlalu bucin ya 😏<br>
+    tapi kalau suatu saat capek nunggu yang gak pasti…<br>
+    website ini masih bisa di-update kok 😉<br><br>
+    - Dibuat khusus oleh <b>Mumu</b> yang niat banget sampe bikin web wkwk 🤍
+    </p>
+  </div>
+</div>
+<!-- Musik -->
+<audio id="bgm" autoplay loop>
+  <source src="https://files.catbox.moe/9q9n2n.mp3" type="audio/mpeg">
+</audio>
+<script>
+let current = 0;
+const slides = document.querySelectorAll(".slide");
+function nextSlide(){
+  slides[current].classList.remove("active");
+  current++;
+  if(current >= slides.length){
+    current = slides.length -1;
+  }
+  slides[current].classList.add("active");
+}
+// Floating hearts generator
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "🤍";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 15 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+setInterval(createHeart, 500);
+</script>
+</body>
+</html>
